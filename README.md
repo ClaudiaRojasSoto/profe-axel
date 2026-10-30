@@ -19,3 +19,7 @@ In development, the content admin credentials are:
 In other environments the account is created only when `ADMIN_PASSWORD` is set.
 
 After Ruby style changes, run `QLTY FMT`.
+
+## License
+
+Released under the [MIT License](LICENSE).

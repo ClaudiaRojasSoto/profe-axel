@@ -1,21 +1,21 @@
 # Profe Axel
 
-Sitio de entrenamiento personal. Rails, PostgreSQL, Tailwind CSS y Stimulus.
+Personal training site. Rails, PostgreSQL, Tailwind CSS, and Stimulus.
 
-## Arranque
+## Getting started
 
 ```sh
 bin/setup
 bin/dev
 ```
 
-El sitio queda en http://localhost:3000.
+The site is available at http://localhost:3000.
 
-En desarrollo, el acceso para administrar contenido es:
+In development, the content admin credentials are:
 
-- Correo: `axel@profeaxel.cl`
-- Clave: el valor de `ADMIN_PASSWORD`, o `profe-axel-dev` si no defines esa variable
+- Email: `axel@profeaxel.cl`
+- Password: the value of `ADMIN_PASSWORD`, or `profe-axel-dev` when that variable is unset
 
-En otros entornos la cuenta solo se crea si existe `ADMIN_PASSWORD`.
+In other environments the account is created only when `ADMIN_PASSWORD` is set.
 
-Cuando termines cambios de estilo en Ruby, corre `QLTY FMT`.
+After Ruby style changes, run `QLTY FMT`.

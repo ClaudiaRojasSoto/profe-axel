@@ -1,0 +1,19 @@
+<header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#05080c]/80 backdrop-blur-xl">
+  <div class="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 lg:px-10">
+    <%= link_to "#inicio", class: "flex items-center gap-3", aria: { label: "Profe Axel, inicio" } do %>
+      <%= image_tag "brand/logo.png", alt: "Logo Profe Axel", class: "size-12 rounded-full border border-cyan-400/40 object-cover" %>
+      <span class="font-display text-lg font-black uppercase leading-none tracking-tight">Profe <span class="text-cyan-400">Axel</span></span>
+    <% end %>
+
+    <nav class="hidden items-center gap-8 text-xs font-bold uppercase tracking-[0.14em] text-slate-300 md:flex" aria-label="Navegación principal">
+      <%= link_to "Método", "#metodo", class: "transition hover:text-cyan-400" %>
+      <%= link_to "Trabajo", "#trabajo", class: "transition hover:text-cyan-400" %>
+      <%= link_to "Axel", "#sobre-axel", class: "transition hover:text-cyan-400" %>
+    </nav>
+
+    <%= link_to "#agenda", class: "flex h-11 items-center gap-2 rounded-full bg-cyan-400 px-5 text-xs font-black uppercase tracking-[0.12em] text-slate-950 transition hover:bg-white" do %>
+      Agendar
+      <%= icon(:arrow, css_class: "size-4") %>
+    <% end %>
+  </div>
+</header>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title><%= content_for(:title) || "Contenido | Profe Axel" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render "shared/fonts" %>
+    <%= favicon_link_tag "brand/logo.png" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen bg-[#05080c] font-sans text-white antialiased">
+    <header class="border-b border-white/10">
+      <div class="mx-auto flex h-20 max-w-[90rem] items-center justify-between px-5 lg:px-10">
+        <%= link_to root_path, class: "flex items-center gap-3", aria: { label: "Volver al sitio" } do %>
+          <%= image_tag "brand/logo.png", alt: "", class: "size-11 rounded-full object-cover" %>
+          <span class="font-display text-lg font-black uppercase tracking-tight">Profe <span class="text-cyan-400">Axel</span></span>
+        <% end %>
+        <nav class="flex items-center gap-6 text-xs font-bold uppercase tracking-[0.14em] text-slate-300" aria-label="Administración">
+          <%= link_to "Contenido", admin_training_clips_path, class: "transition hover:text-cyan-400" %>
+          <%= link_to "Solicitudes", admin_evaluation_requests_path, class: "transition hover:text-cyan-400" %>
+          <%= button_to "Salir", admin_session_path, method: :delete, form_class: "inline", class: "text-xs font-bold uppercase tracking-[0.14em] text-slate-300 transition hover:text-cyan-400" %>
+        </nav>
+      </div>
+    </header>
+    <main class="mx-auto max-w-[90rem] px-5 py-12 lg:px-10">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
+  </body>
+</html>

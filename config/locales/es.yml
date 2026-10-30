@@ -1,0 +1,17 @@
+es:
+  activerecord:
+    errors:
+      models:
+        evaluation_request:
+          attributes:
+            base:
+              contact_channel_missing: "Deja un teléfono o un correo para que Axel pueda contactarte."
+            consent:
+              accepted: "tiene que estar marcado para coordinar la evaluación"
+            preferred_on:
+              in_the_past: "tiene que ser hoy o una fecha futura"
+        training_clip:
+          attributes:
+            image:
+              blank: "es obligatoria"
+              invalid: "tiene que ser JPG, PNG o WebP"

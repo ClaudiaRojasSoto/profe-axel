@@ -1,0 +1,82 @@
+<div id="agenda_form" class="rounded-3xl border border-white/10 bg-[#0b1118]/90 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur md:p-10">
+  <div class="mb-8">
+    <p class="text-xs font-black uppercase tracking-[0.18em] text-cyan-300">Agenda una evaluación</p>
+    <h3 class="font-display mt-3 text-3xl font-black uppercase">Cuéntame sobre ti</h3>
+  </div>
+
+  <%= form_with model: page.evaluation_request, class: "grid gap-5" do |form| %>
+    <% if page.evaluation_request.errors[:base].any? %>
+      <div class="rounded-xl border border-red-300/30 bg-red-300/10 px-4 py-3 text-sm text-red-100" role="alert">
+        <%= page.evaluation_request.errors[:base].to_sentence %>
+      </div>
+    <% end %>
+
+    <div class="honeypot">
+      <%= label_tag :website, "Sitio web" %>
+      <%= text_field_tag :website, nil, tabindex: -1, autocomplete: "off" %>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <%= form.label :name, class: "grid gap-2 text-sm font-semibold text-white" do %>
+        Nombre
+        <%= form.text_field :name, required: true, autocomplete: "name", placeholder: "Tu nombre", class: field_classes(page.evaluation_request, :name, "h-14") %>
+        <%= field_errors(page.evaluation_request, :name) %>
+      <% end %>
+      <%= form.label :phone, class: "grid gap-2 text-sm font-semibold text-white" do %>
+        Teléfono
+        <%= form.telephone_field :phone, autocomplete: "tel", placeholder: "+56 9...", class: field_classes(page.evaluation_request, :phone, "h-14") %>
+        <%= field_errors(page.evaluation_request, :phone) %>
+      <% end %>
+    </div>
+
+    <%= form.label :email, class: "grid gap-2 text-sm font-semibold text-white" do %>
+      Correo
+      <span class="font-normal text-slate-400">(opcional si dejas teléfono)</span>
+      <%= form.email_field :email, autocomplete: "email", placeholder: "tu@correo.com", class: field_classes(page.evaluation_request, :email, "h-14") %>
+      <%= field_errors(page.evaluation_request, :email) %>
+    <% end %>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <%= form.label :goal, class: "grid gap-2 text-sm font-semibold text-white" do %>
+        Tu objetivo
+        <%= form.select :goal, EvaluationRequest.options_for(EvaluationRequest::GOALS), { prompt: "Seleccionar" }, required: true, class: field_classes(page.evaluation_request, :goal, "h-14") %>
+        <%= field_errors(page.evaluation_request, :goal) %>
+      <% end %>
+      <%= form.label :modality, class: "grid gap-2 text-sm font-semibold text-white" do %>
+        Modalidad
+        <%= form.select :modality, EvaluationRequest.options_for(EvaluationRequest::MODALITIES), { prompt: "Seleccionar" }, required: true, class: field_classes(page.evaluation_request, :modality, "h-14") %>
+        <%= field_errors(page.evaluation_request, :modality) %>
+      <% end %>
+    </div>
+
+    <div class="grid gap-5 sm:grid-cols-2">
+      <%= form.label :preferred_on, class: "grid gap-2 text-sm font-semibold text-white" do %>
+        Fecha preferida
+        <%= form.date_field :preferred_on, required: true, min: Date.current, class: field_classes(page.evaluation_request, :preferred_on, "h-14") %>
+        <%= field_errors(page.evaluation_request, :preferred_on) %>
+      <% end %>
+      <%= form.label :preferred_time, class: "grid gap-2 text-sm font-semibold text-white" do %>
+        Horario
+        <%= form.select :preferred_time, EvaluationRequest.options_for(EvaluationRequest::PREFERRED_TIMES), { prompt: "Seleccionar" }, required: true, class: field_classes(page.evaluation_request, :preferred_time, "h-14") %>
+        <%= field_errors(page.evaluation_request, :preferred_time) %>
+      <% end %>
+    </div>
+
+    <%= form.label :message, class: "grid gap-2 text-sm font-semibold text-white" do %>
+      Cuéntame un poco más
+      <%= form.text_area :message, placeholder: "¿Qué te gustaría lograr? ¿Tienes alguna lesión o experiencia previa?", class: field_classes(page.evaluation_request, :message, "min-h-32 resize-y p-4") %>
+      <%= field_errors(page.evaluation_request, :message) %>
+    <% end %>
+
+    <%= form.label :consent, class: "flex items-start gap-3 text-sm leading-6 text-slate-300" do %>
+      <%= form.check_box :consent, required: true, class: "mt-1 size-4 accent-cyan-400" %>
+      <span>Autorizo a Profe Axel a contactarme para coordinar una evaluación.</span>
+    <% end %>
+    <%= field_errors(page.evaluation_request, :consent) %>
+
+    <%= form.button class: "group flex h-16 items-center justify-center gap-3 rounded-xl bg-cyan-400 px-6 text-sm font-black uppercase tracking-[0.16em] text-slate-950 transition hover:bg-white disabled:cursor-wait disabled:opacity-60" do %>
+      Quiero empezar
+      <%= icon(:arrow, css_class: "size-5 transition-transform group-hover:translate-x-1") %>
+    <% end %>
+  <% end %>
+</div>

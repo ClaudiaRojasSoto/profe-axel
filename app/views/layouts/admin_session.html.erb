@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Entrar | Profe Axel</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render "shared/fonts" %>
+    <%= favicon_link_tag "brand/logo.png" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="grid min-h-screen place-items-center bg-[#05080c] px-5 font-sans text-white antialiased">
+    <main class="w-full max-w-md">
+      <%= yield %>
+    </main>
+  </body>
+</html>

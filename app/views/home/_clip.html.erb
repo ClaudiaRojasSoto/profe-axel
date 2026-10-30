@@ -1,0 +1,24 @@
+<%= link_to clip.external_url, target: "_blank", rel: "noopener noreferrer", class: "group relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900 #{featured_layout ? "md:col-span-2 md:row-span-2" : ""}" do %>
+  <div class="relative <%= featured_layout ? "min-h-[34rem]" : "min-h-80" %>">
+    <%= image_tag clip.image, alt: clip.image_alt, class: "media-fill transition duration-700 group-hover:scale-105" %>
+    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+    <div class="absolute top-5 left-5 flex items-center gap-2">
+      <span class="rounded-full bg-cyan-400 px-3 py-1 text-[0.65rem] font-black uppercase tracking-[0.16em] text-slate-950"><%= clip.category_label %></span>
+      <% if clip.featured? %>
+        <span class="rounded-full border border-white/25 bg-black/30 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white backdrop-blur">Destacado</span>
+      <% end %>
+    </div>
+    <div class="absolute right-0 bottom-0 left-0 p-6 md:p-8">
+      <div class="mb-5 flex items-center justify-between">
+        <span class="grid size-12 place-items-center rounded-full bg-white text-slate-950 transition group-hover:scale-110 group-hover:bg-cyan-400">
+          <%= icon(:play, css_class: "ml-0.5 size-5") %>
+        </span>
+        <span class="text-xs font-bold tracking-[0.16em] text-slate-300"><%= clip.duration_label %></span>
+      </div>
+      <h3 class="font-display font-black uppercase leading-[0.95] tracking-tight text-white <%= featured_layout ? "text-4xl md:text-5xl" : "text-2xl" %>">
+        <%= clip.title %>
+      </h3>
+      <p class="mt-3 max-w-xl text-sm leading-6 text-slate-300"><%= clip.summary %></p>
+    </div>
+  </div>
+<% end %>

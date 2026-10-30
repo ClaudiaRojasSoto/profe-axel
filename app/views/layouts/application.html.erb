@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title><%= content_for(:title) || "Profe Axel | Entrenamiento personal" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="<%= content_for(:description) || "Entrenamiento personal con propósito, técnica y un plan construido alrededor de tu vida." %>">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <%= render "shared/fonts" %>
+    <%= favicon_link_tag "brand/logo.png" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen bg-[#05080c] font-sans text-white antialiased">
+    <a class="skip-link" href="#inicio">Saltar al contenido</a>
+    <main class="overflow-hidden bg-[#05080c] text-white">
+      <%= render "shared/header" %>
+      <%= yield %>
+      <%= render "shared/footer" %>
+    </main>
+  </body>
+</html>

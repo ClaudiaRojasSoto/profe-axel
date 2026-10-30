@@ -1,0 +1,39 @@
+<section id="sobre-axel" class="border-y border-white/10 bg-[#0a0f15]">
+  <div class="mx-auto grid max-w-[90rem] lg:grid-cols-2">
+    <div class="group relative min-h-[34rem] overflow-hidden lg:min-h-[48rem]">
+      <%= image_tag "brand/hero.jpg", alt: "Entrenamiento de fuerza en gimnasio", class: "media-fill grayscale transition duration-700 group-hover:grayscale-0" %>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+      <div class="absolute right-7 bottom-7 left-7 flex items-end justify-between">
+        <p class="font-display text-3xl font-black uppercase leading-none">
+          Entrena con<br>
+          <span class="text-cyan-400">propósito.</span>
+        </p>
+        <span class="text-[0.65rem] uppercase tracking-[0.16em] text-slate-400">Foto ilustrativa</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col justify-center p-7 py-20 md:p-16 lg:p-20">
+      <span class="section-label">02 — Profe Axel</span>
+      <h2 class="font-display mt-7 text-5xl font-black uppercase leading-[0.9] tracking-[-0.04em] md:text-7xl">
+        Tu cambio empieza cuando decides moverte.
+      </h2>
+      <p class="mt-8 max-w-xl text-base leading-7 text-slate-300">
+        La meta no es agotarte por una semana. Es enseñarte a moverte mejor, entrenar con confianza y construir resultados que formen parte de tu vida.
+      </p>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        <% page.benefits.each do |benefit| %>
+          <div class="flex items-center gap-3 text-sm font-bold">
+            <span class="grid size-7 place-items-center rounded-full bg-cyan-400 text-slate-950">
+              <%= icon(:check, css_class: "size-4") %>
+            </span>
+            <%= benefit %>
+          </div>
+        <% end %>
+      </div>
+      <%= link_to instagram_url, target: "_blank", rel: "noopener noreferrer", class: "mt-11 flex w-fit items-center gap-3 border-b border-cyan-400 pb-2 text-sm font-black uppercase tracking-[0.14em] text-cyan-300 transition hover:text-white" do %>
+        <%= icon(:instagram, css_class: "size-5") %>
+        @profe_axel92
+      <% end %>
+    </div>
+  </div>
+</section>

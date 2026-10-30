@@ -1,0 +1,43 @@
+<section id="inicio" class="relative min-h-screen pt-20">
+  <%= image_tag "brand/hero.jpg", alt: "Atleta entrenando fuerza con barra en un gimnasio", class: "media-fill media-hero", fetchpriority: "high" %>
+  <div class="absolute inset-0 bg-gradient-to-r from-[#05080c] via-[#05080c]/80 to-[#05080c]/15"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-[#05080c] via-transparent to-[#05080c]/20"></div>
+  <div class="hero-grid absolute inset-0 opacity-30"></div>
+
+  <div class="relative mx-auto flex min-h-[calc(100vh-5rem)] max-w-[90rem] items-center px-5 py-20 lg:px-10">
+    <div class="max-w-5xl">
+      <div class="mb-8 flex items-center gap-3 text-xs font-black uppercase tracking-[0.24em] text-cyan-300">
+        <span class="h-px w-10 bg-cyan-400"></span>
+        Entrenamiento personal con intención
+      </div>
+      <h1 class="font-display max-w-5xl text-[clamp(4.4rem,11vw,10.5rem)] font-black uppercase leading-[0.76] tracking-[-0.055em]">
+        Más fuerte.
+        <span class="text-outline block">Más capaz.</span>
+        Más tú.
+      </h1>
+      <p class="mt-9 max-w-xl text-base leading-7 text-slate-300 md:text-lg">
+        Entrenamiento personal con propósito, técnica y un plan construido alrededor de tu vida.
+      </p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <%= link_to "#agenda", class: "group flex h-16 items-center justify-center gap-4 rounded-xl bg-cyan-400 px-7 text-sm font-black uppercase tracking-[0.14em] text-slate-950 transition hover:bg-white" do %>
+          Empieza tu proceso
+          <%= icon(:arrow, css_class: "size-5 transition-transform group-hover:translate-x-1") %>
+        <% end %>
+        <%= link_to "#trabajo", class: "flex h-16 items-center justify-center gap-3 rounded-xl border border-white/20 bg-black/20 px-7 text-sm font-black uppercase tracking-[0.14em] text-white backdrop-blur transition hover:border-cyan-400 hover:text-cyan-300" do %>
+          <%= icon(:play, css_class: "size-5") %>
+          Ver entrenamientos
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="absolute right-0 bottom-0 hidden border-t border-l border-white/10 bg-black/35 p-7 backdrop-blur-xl lg:block">
+    <div class="flex items-center gap-5">
+      <%= image_tag "brand/logo.png", alt: "Identidad de Profe Axel", class: "size-16 rounded-full border border-cyan-400/40 object-cover" %>
+      <div>
+        <p class="text-xs font-black uppercase tracking-[0.18em] text-cyan-300">Entrena con Axel</p>
+        <p class="mt-1 text-sm text-slate-300">Entrenamiento presencial y online</p>
+      </div>
+    </div>
+  </div>
+</section>

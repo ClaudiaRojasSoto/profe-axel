@@ -1,0 +1,65 @@
+<%= form_with model: [ :admin, training_clip ], class: "grid gap-5", data: { controller: "image-preview" } do |form| %>
+  <% if training_clip.errors.any? %>
+    <div class="rounded-xl border border-red-300/30 bg-red-300/10 px-4 py-3 text-sm text-red-100" role="alert">
+      <%= training_clip.errors.full_messages.to_sentence %>
+    </div>
+  <% end %>
+
+  <%= form.label :title, "Título", class: "grid gap-2 text-sm font-semibold" do %>
+    Título
+    <%= form.text_field :title, required: true, class: field_classes(training_clip, :title, "h-14") %>
+  <% end %>
+
+  <%= form.label :summary, "Resumen", class: "grid gap-2 text-sm font-semibold" do %>
+    Resumen
+    <%= form.text_area :summary, required: true, class: field_classes(training_clip, :summary, "min-h-28 p-4") %>
+  <% end %>
+
+  <div class="grid gap-5 sm:grid-cols-2">
+    <%= form.label :category, "Categoría", class: "grid gap-2 text-sm font-semibold" do %>
+      Categoría
+      <%= form.select :category, TrainingClip.category_options, { prompt: "Seleccionar" }, required: true, class: field_classes(training_clip, :category, "h-14") %>
+    <% end %>
+    <%= form.label :duration_label, "Duración", class: "grid gap-2 text-sm font-semibold" do %>
+      Duración
+      <%= form.text_field :duration_label, required: true, placeholder: "01:12", class: field_classes(training_clip, :duration_label, "h-14") %>
+    <% end %>
+  </div>
+
+  <%= form.label :external_url, "Enlace", class: "grid gap-2 text-sm font-semibold" do %>
+    Enlace
+    <%= form.url_field :external_url, required: true, class: field_classes(training_clip, :external_url, "h-14") %>
+  <% end %>
+
+  <%= form.label :image_alt, "Texto alternativo de la imagen", class: "grid gap-2 text-sm font-semibold" do %>
+    Texto alternativo de la imagen
+    <%= form.text_field :image_alt, required: true, class: field_classes(training_clip, :image_alt, "h-14") %>
+  <% end %>
+
+  <div class="grid gap-3">
+    <%= form.label :image, "Imagen", class: "text-sm font-semibold" %>
+    <%= form.file_field :image, accept: "image/jpeg,image/png,image/webp", data: { image_preview_target: "input", action: "change->image-preview#show" }, class: "text-sm text-slate-300" %>
+    <% preview = training_clip.image.attached? ? training_clip.image : "brand/logo.png" %>
+    <%= image_tag preview, alt: "", class: "mt-2 h-40 w-full rounded-xl object-cover #{training_clip.image.attached? ? "" : "hidden"}", data: { image_preview_target: "preview" } %>
+  </div>
+
+  <div class="grid gap-5 sm:grid-cols-3">
+    <%= form.label :position, "Orden", class: "grid gap-2 text-sm font-semibold" do %>
+      Orden
+      <%= form.number_field :position, min: 1, class: field_classes(training_clip, :position, "h-14") %>
+    <% end %>
+    <%= form.label :featured, class: "flex items-center gap-3 self-end pb-4 text-sm font-semibold" do %>
+      <%= form.check_box :featured, class: "size-4 accent-cyan-400" %>
+      Destacado
+    <% end %>
+    <%= form.label :published, class: "flex items-center gap-3 self-end pb-4 text-sm font-semibold" do %>
+      <%= form.check_box :published, class: "size-4 accent-cyan-400" %>
+      Visible en el sitio
+    <% end %>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <%= form.submit training_clip.persisted? ? "Guardar cambios" : "Publicar", class: "h-14 rounded-xl bg-cyan-400 px-6 text-sm font-black uppercase tracking-[0.14em] text-slate-950 transition hover:bg-white" %>
+    <%= link_to "Cancelar", admin_training_clips_path, class: "text-sm font-bold uppercase tracking-[0.14em] text-slate-400 transition hover:text-white" %>
+  </div>
+<% end %>

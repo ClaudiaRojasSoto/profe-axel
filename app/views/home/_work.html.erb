@@ -1,0 +1,24 @@
+<section id="trabajo" class="mx-auto max-w-[90rem] px-5 py-28 lg:px-10 lg:py-40">
+  <div class="mb-14 flex flex-col justify-between gap-7 md:flex-row md:items-end">
+    <div>
+      <span class="section-label">03 — Trabajo real</span>
+      <h2 class="font-display mt-7 text-5xl font-black uppercase leading-[0.88] tracking-[-0.04em] md:text-7xl">
+        Mira. Aprende.
+        <span class="block text-cyan-400">Ponte en acción.</span>
+      </h2>
+    </div>
+    <%= link_to instagram_url, target: "_blank", rel: "noopener noreferrer", class: "flex items-center gap-3 text-sm font-black uppercase tracking-[0.14em] text-slate-300 transition hover:text-cyan-300" do %>
+      Todos los videos
+      <%= icon(:arrow, css_class: "size-5") %>
+    <% end %>
+  </div>
+
+  <% if page.featured_clip %>
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <%= render "home/clip", clip: page.featured_clip, featured_layout: true %>
+      <% page.supporting_clips.each do |clip| %>
+        <%= render "home/clip", clip: clip, featured_layout: false %>
+      <% end %>
+    </div>
+  <% end %>
+</section>

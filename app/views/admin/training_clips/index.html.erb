@@ -1,0 +1,33 @@
+<div class="mb-10 flex items-end justify-between gap-6">
+  <div>
+    <p class="text-xs font-black uppercase tracking-[0.18em] text-cyan-300">Sitio</p>
+    <h1 class="font-display mt-3 text-5xl font-black uppercase">Entrenamientos</h1>
+  </div>
+  <%= link_to "Nuevo", new_admin_training_clip_path, class: "flex h-11 items-center rounded-full bg-cyan-400 px-5 text-xs font-black uppercase tracking-[0.12em] text-slate-950 transition hover:bg-white" %>
+</div>
+
+<% if @training_clips.empty? %>
+  <p class="text-slate-400">Todavía no hay entrenamientos publicados.</p>
+<% else %>
+  <div class="grid gap-4">
+    <% @training_clips.each do |clip| %>
+      <article class="grid gap-5 rounded-2xl border border-white/10 bg-[#0a0f15] p-5 md:grid-cols-[8rem_1fr_auto] md:items-center">
+        <% if clip.image.attached? %>
+          <%= image_tag clip.image, alt: "", class: "h-24 w-full rounded-xl object-cover md:w-32" %>
+        <% end %>
+        <div>
+          <p class="text-xs font-black uppercase tracking-[0.16em] text-cyan-300"><%= clip.category_label %> · <%= clip.duration_label %></p>
+          <h2 class="font-display mt-2 text-2xl font-black uppercase"><%= clip.title %></h2>
+          <p class="mt-1 text-sm text-slate-400">
+            <%= clip.published? ? "Visible" : "Oculto" %>
+            <%= "· Destacado" if clip.featured? %>
+          </p>
+        </div>
+        <div class="flex items-center gap-4 text-xs font-bold uppercase tracking-[0.14em]">
+          <%= link_to "Editar", edit_admin_training_clip_path(clip), class: "text-slate-300 transition hover:text-cyan-300" %>
+          <%= button_to "Eliminar", admin_training_clip_path(clip), method: :delete, class: "text-xs font-bold uppercase tracking-[0.14em] text-slate-500 transition hover:text-red-300", form: { data: { turbo_confirm: "¿Eliminar este entrenamiento?" } } %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+<% end %>

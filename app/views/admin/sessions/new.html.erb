@@ -1,0 +1,23 @@
+<div class="mb-8 flex items-center gap-3">
+  <%= image_tag "brand/logo.png", alt: "", class: "size-12 rounded-full border border-cyan-400/40 object-cover" %>
+  <span class="font-display text-lg font-black uppercase tracking-tight">Profe <span class="text-cyan-400">Axel</span></span>
+</div>
+
+<div class="rounded-3xl border border-white/10 bg-[#0b1118] p-6 md:p-8">
+  <p class="text-xs font-black uppercase tracking-[0.18em] text-cyan-300">Contenido</p>
+  <h1 class="font-display mt-3 text-4xl font-black uppercase">Entra para administrar</h1>
+
+  <%= render "shared/flash" %>
+
+  <%= form_with url: admin_session_path, class: "mt-8 grid gap-5" do |form| %>
+    <%= form.label :email, "Correo", class: "grid gap-2 text-sm font-semibold" do %>
+      Correo
+      <%= form.email_field :email, required: true, autocomplete: "username", value: params[:email], class: "field-control h-14 w-full rounded-xl border border-white/15 bg-white/[0.06] px-4 outline-none transition focus:border-cyan-400" %>
+    <% end %>
+    <%= form.label :password, "Clave", class: "grid gap-2 text-sm font-semibold" do %>
+      Clave
+      <%= form.password_field :password, required: true, autocomplete: "current-password", class: "field-control h-14 w-full rounded-xl border border-white/15 bg-white/[0.06] px-4 outline-none transition focus:border-cyan-400" %>
+    <% end %>
+    <%= form.submit "Entrar", class: "h-14 rounded-xl bg-cyan-400 text-sm font-black uppercase tracking-[0.14em] text-slate-950 transition hover:bg-white" %>
+  <% end %>
+</div>

@@ -1,0 +1,51 @@
+<div class="mb-10">
+  <p class="text-xs font-black uppercase tracking-[0.18em] text-cyan-300">Agenda</p>
+  <h1 class="font-display mt-3 text-5xl font-black uppercase">Solicitudes</h1>
+</div>
+
+<% if @evaluation_requests.empty? %>
+  <p class="text-slate-400">Todavía no hay solicitudes.</p>
+<% else %>
+  <div class="grid gap-4">
+    <% @evaluation_requests.each do |evaluation_request| %>
+      <article class="rounded-2xl border border-white/10 bg-[#0a0f15] p-6">
+        <div class="flex flex-col justify-between gap-4 md:flex-row md:items-start">
+          <div>
+            <p class="text-xs font-black uppercase tracking-[0.16em] text-cyan-300">
+              <%= l(evaluation_request.created_at, format: :short) %>
+              · <%= evaluation_request.contacted? ? "Contactada" : "Pendiente" %>
+            </p>
+            <h2 class="font-display mt-2 text-3xl font-black uppercase"><%= evaluation_request.name %></h2>
+          </div>
+          <% unless evaluation_request.contacted? %>
+            <%= button_to "Marcar contactada", admin_evaluation_request_path(evaluation_request), method: :patch, class: "h-11 rounded-full bg-cyan-400 px-5 text-xs font-black uppercase tracking-[0.12em] text-slate-950 transition hover:bg-white" %>
+          <% end %>
+        </div>
+        <dl class="mt-6 grid gap-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Contacto</dt>
+            <dd class="mt-1 text-slate-200"><%= [ evaluation_request.phone, evaluation_request.email ].compact.join(" · ") %></dd>
+          </div>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Objetivo</dt>
+            <dd class="mt-1 text-slate-200"><%= evaluation_request.goal_label %></dd>
+          </div>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Modalidad</dt>
+            <dd class="mt-1 text-slate-200"><%= evaluation_request.modality_label %></dd>
+          </div>
+          <div>
+            <dt class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Fecha</dt>
+            <dd class="mt-1 text-slate-200"><%= l(evaluation_request.preferred_on, format: :long) %> · <%= evaluation_request.preferred_time_label %></dd>
+          </div>
+          <% if evaluation_request.message.present? %>
+            <div class="sm:col-span-2">
+              <dt class="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Nota</dt>
+              <dd class="mt-1 text-slate-200"><%= evaluation_request.message %></dd>
+            </div>
+          <% end %>
+        </dl>
+      </article>
+    <% end %>
+  </div>
+<% end %>

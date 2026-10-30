@@ -4,6 +4,8 @@ class EvaluationRequestsController < ApplicationController
 
     evaluation_request = EvaluationRequest.new(evaluation_request_params)
     if evaluation_request.save
+      NotifyEvaluationRequestJob.perform_later(evaluation_request.id)
+
       respond_to do |format|
         format.turbo_stream do
           render turbo_stream: turbo_stream.replace(

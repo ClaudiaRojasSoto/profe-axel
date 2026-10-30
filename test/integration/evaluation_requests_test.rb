@@ -2,8 +2,10 @@ require "test_helper"
 
 class EvaluationRequestsTest < ActionDispatch::IntegrationTest
   test "stores a request and confirms it on the agenda" do
-    assert_difference -> { EvaluationRequest.count }, 1 do
-      post evaluation_requests_path, params: { evaluation_request: valid_params }
+    assert_enqueued_with(job: NotifyEvaluationRequestJob) do
+      assert_difference -> { EvaluationRequest.count }, 1 do
+        post evaluation_requests_path, params: { evaluation_request: valid_params }
+      end
     end
 
     assert_redirected_to root_path(anchor: "agenda")
@@ -21,8 +23,10 @@ class EvaluationRequestsTest < ActionDispatch::IntegrationTest
   end
 
   test "keeps the form when the request cannot be saved" do
-    assert_no_difference -> { EvaluationRequest.count } do
-      post evaluation_requests_path, params: { evaluation_request: valid_params.merge(message: "") }
+    assert_no_enqueued_jobs only: NotifyEvaluationRequestJob do
+      assert_no_difference -> { EvaluationRequest.count } do
+        post evaluation_requests_path, params: { evaluation_request: valid_params.merge(message: "") }
+      end
     end
 
     assert_response :unprocessable_entity
@@ -31,8 +35,10 @@ class EvaluationRequestsTest < ActionDispatch::IntegrationTest
   end
 
   test "ignores a filled honeypot" do
-    assert_no_difference -> { EvaluationRequest.count } do
-      post evaluation_requests_path, params: { evaluation_request: valid_params, website: "https://spam.test" }
+    assert_no_enqueued_jobs only: NotifyEvaluationRequestJob do
+      assert_no_difference -> { EvaluationRequest.count } do
+        post evaluation_requests_path, params: { evaluation_request: valid_params, website: "https://spam.test" }
+      end
     end
 
     assert_redirected_to root_path(anchor: "agenda")

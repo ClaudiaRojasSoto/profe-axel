@@ -41,6 +41,8 @@ class AdminFlowTest < ActionDispatch::IntegrationTest
     request = EvaluationRequest.create!(
       name: "Camila Soto",
       phone: "+56912345678",
+      email: "camila@example.com",
+      message: "Quiero volver a entrenar.",
       goal: "fuerza",
       modality: "presencial",
       preferred_on: Date.current + 1,

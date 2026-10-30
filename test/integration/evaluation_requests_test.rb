@@ -22,12 +22,12 @@ class EvaluationRequestsTest < ActionDispatch::IntegrationTest
 
   test "keeps the form when the request cannot be saved" do
     assert_no_difference -> { EvaluationRequest.count } do
-      post evaluation_requests_path, params: { evaluation_request: valid_params.merge(name: "", phone: "", email: "") }
+      post evaluation_requests_path, params: { evaluation_request: valid_params.merge(message: "") }
     end
 
     assert_response :unprocessable_entity
     assert_select "h3", text: "Cuéntame sobre ti"
-    assert_match "Deja un teléfono o un correo", response.body
+    assert_match "no puede estar en blanco", response.body
   end
 
   test "ignores a filled honeypot" do
@@ -51,6 +51,7 @@ class EvaluationRequestsTest < ActionDispatch::IntegrationTest
     {
       name: "Camila Soto",
       phone: "+56912345678",
+      email: "camila@example.com",
       goal: "fuerza",
       modality: "online",
       preferred_on: Date.current + 2,

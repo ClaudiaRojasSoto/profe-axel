@@ -28,15 +28,15 @@ class EvaluationRequest < ApplicationRecord
   normalizes :message, with: ->(message) { message.to_s.strip.presence }
 
   validates :name, presence: true, length: { maximum: 80 }
-  validates :phone, length: { maximum: 30 }, allow_nil: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_nil: true
+  validates :phone, presence: true, length: { maximum: 30 }
+  validates :email, presence: true
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, allow_blank: true
   validates :goal, inclusion: { in: GOALS.keys }
   validates :modality, inclusion: { in: MODALITIES.keys }
   validates :preferred_time, inclusion: { in: PREFERRED_TIMES.keys }
   validates :preferred_on, presence: true
-  validates :message, length: { maximum: 2000 }, allow_nil: true
+  validates :message, presence: true, length: { maximum: 2000 }
   validates :consent, acceptance: true
-  validate :contact_channel_present
   validate :preferred_on_is_available
 
   def goal_label
@@ -60,12 +60,6 @@ class EvaluationRequest < ApplicationRecord
   end
 
   private
-
-  def contact_channel_present
-    return if phone.present? || email.present?
-
-    errors.add(:base, :contact_channel_missing)
-  end
 
   def preferred_on_is_available
     return if preferred_on.blank? || preferred_on >= Date.current

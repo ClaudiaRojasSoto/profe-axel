@@ -7,17 +7,13 @@ class EvaluationRequestTest < ActiveSupport::TestCase
     assert request.valid?
   end
 
-  test "accepts email when the phone is missing" do
-    request = EvaluationRequest.new(valid_attributes.merge(phone: nil, email: "camila@example.com"))
+  test "requires phone, email, and message" do
+    %i[phone email message].each do |attribute|
+      request = EvaluationRequest.new(valid_attributes.merge(attribute => nil))
 
-    assert request.valid?
-  end
-
-  test "requires a way to get in touch" do
-    request = EvaluationRequest.new(valid_attributes.merge(phone: nil, email: nil))
-
-    assert_not request.valid?
-    assert_includes request.errors[:base], "Deja un teléfono o un correo para que Axel pueda contactarte."
+      assert_not request.valid?, "#{attribute} should be required"
+      assert_includes request.errors[attribute], "no puede estar en blanco"
+    end
   end
 
   test "rejects a past preferred date" do
@@ -39,6 +35,7 @@ class EvaluationRequestTest < ActiveSupport::TestCase
     {
       name: "Camila Soto",
       phone: "+56912345678",
+      email: "camila@example.com",
       goal: "fuerza",
       modality: "presencial",
       preferred_on: Date.current + 3,

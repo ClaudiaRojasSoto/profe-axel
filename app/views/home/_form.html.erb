@@ -24,15 +24,14 @@
       <% end %>
       <%= form.label :phone, class: "grid gap-2 text-sm font-semibold text-white" do %>
         Teléfono
-        <%= form.telephone_field :phone, autocomplete: "tel", placeholder: "+56 9...", class: field_classes(page.evaluation_request, :phone, "h-14") %>
+        <%= form.telephone_field :phone, required: true, autocomplete: "tel", placeholder: "+56 9...", class: field_classes(page.evaluation_request, :phone, "h-14") %>
         <%= field_errors(page.evaluation_request, :phone) %>
       <% end %>
     </div>
 
     <%= form.label :email, class: "grid gap-2 text-sm font-semibold text-white" do %>
       Correo
-      <span class="font-normal text-slate-400">(opcional si dejas teléfono)</span>
-      <%= form.email_field :email, autocomplete: "email", placeholder: "tu@correo.com", class: field_classes(page.evaluation_request, :email, "h-14") %>
+      <%= form.email_field :email, required: true, autocomplete: "email", placeholder: "tu@correo.com", class: field_classes(page.evaluation_request, :email, "h-14") %>
       <%= field_errors(page.evaluation_request, :email) %>
     <% end %>
 
@@ -64,7 +63,7 @@
 
     <%= form.label :message, class: "grid gap-2 text-sm font-semibold text-white" do %>
       Cuéntame un poco más
-      <%= form.text_area :message, placeholder: "¿Qué te gustaría lograr? ¿Tienes alguna lesión o experiencia previa?", class: field_classes(page.evaluation_request, :message, "min-h-32 resize-y p-4") %>
+      <%= form.text_area :message, required: true, placeholder: "¿Qué te gustaría lograr? ¿Tienes alguna lesión o experiencia previa?", class: field_classes(page.evaluation_request, :message, "min-h-32 resize-y p-4") %>
       <%= field_errors(page.evaluation_request, :message) %>
     <% end %>
 
